@@ -30,3 +30,10 @@ Este programa é um servidor REST. Tem 3 endpoints implementados:
 Este é um analisador lexical ao qual podem ser atribuidos tokens com as suas respetivas expressões regulares.
 
 O analisador permite separar uma string por tokens.
+
+
+# Referências
+
+1. https://github.com/ricardo-quintela/led_controller/
+2. https://github.com/ricardo-quintela/negate/
+3. https://github.com/ricardo-quintela/compyler/
