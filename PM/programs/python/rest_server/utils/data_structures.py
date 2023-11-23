@@ -1,4 +1,5 @@
-from typing import TypedDict, Dict, List, Union
+from random import randint
+from typing import TypedDict, List, Union
 
 ROOM_ID_LEN = 5
 
@@ -28,7 +29,7 @@ class RoomData:
             RoomInfo: the room data for the given room id
         """
         return self._rooms[room_id] if room_id in self._rooms else None
-    
+
     def add_player(self, room_id: str) -> Union[int, None]:
         """Increases the player count on the room with the given
         id if it exists
@@ -71,7 +72,7 @@ class RoomData:
             room_id = ""
 
         # create the room
-        rooms[room_id] = dict(
+        self._rooms[room_id] = dict(
             playerCount=0,
             players=dict()
         )

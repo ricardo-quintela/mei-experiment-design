@@ -1,6 +1,5 @@
 import logging
 
-from random import randint
 from flask import Flask, redirect, request, abort
 from flask.logging import default_handler
 
