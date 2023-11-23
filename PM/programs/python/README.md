@@ -7,7 +7,7 @@ duas funções que se podem considerar abstratas.
 
 Por ordem de mais simples para mais complexo.
 
-1. [K Means numa imagem](/k_means_image.py)
+1. [K Means numa imagem](k_means_image.py)
 
 Este programa aplica o algoritmo de clustering K Means a uma imagem guardada num array.
 
@@ -17,7 +17,7 @@ espaço de cor [CIELAB](https://en.wikipedia.org/wiki/CIELAB_color_space).
 - `ciede2000_distance()` calcula a distância entre duas cores no espaço CIELAB
 utilizando a distância [CIEDE2000](https://en.wikipedia.org/wiki/Color_difference#CIEDE2000).
 
-2. [Servidor REST](/rest_server.py)
+2. [Servidor REST](rest_server.py)
 
 Este programa é um servidor REST. Tem 3 endpoints implementados:
 
@@ -25,7 +25,7 @@ Este programa é um servidor REST. Tem 3 endpoints implementados:
 - `create-room?username=STRING` - cria uma sala em memória com um ID aleatório à qual se pode juntar outro cliente.
 - `/game/<room_id>?username=STRING` - permite que um cliente se junte a uma sala criada previamente.
 
-3. [Lexer](/lexer.py)
+3. [Lexer](lexer.py)
 
 Este é um analisador lexical ao qual podem ser atribuidos tokens com as suas respetivas expressões regulares.
 
