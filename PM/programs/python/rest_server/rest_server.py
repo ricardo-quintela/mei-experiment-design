@@ -1,62 +1,9 @@
-from typing import TypedDict, Dict, List
 import logging
 
-from random import randint
 from flask import Flask, redirect, request, abort
 from flask.logging import default_handler
 
-
-ROOM_ID_LEN = 5
-
-
-class PlayerInfo(TypedDict):
-    """Annotates information about a Player
-    """
-    username: str
-    isReady: bool
-    character: int
-    position: List[int]
-    facing: str
-    isMoving: bool
-    isInteracting: bool
-
-
-class RoomInfo(TypedDict):
-    """Annotates information about how the room info
-    """
-    playerCount: int
-    players: Dict[str, PlayerInfo]
-
-
-def generate_room(rooms):
-    """Generates a valid and unique room id
-    and creates a new room
-
-    Returns:
-        str: an unique room id
-    """
-    # atempt to generate an unique code
-    room_id = ""
-    while True:
-
-        # generate a random string
-        for _ in range(ROOM_ID_LEN):
-            ascii_code = randint(ord("A"), ord("Z"))
-            room_id += chr(ascii_code)
-
-        if room_id not in rooms:
-            break
-
-        room_id = ""
-
-    # create the room
-    rooms[room_id] = dict(
-        playerCount=0,
-        players=dict()
-    )
-
-    return room_id
-
+from utils import RoomData
 
 # create the app
 app = Flask(
@@ -68,7 +15,6 @@ app = Flask(
 app.config["SECRET_KEY"] = "secret!"
 
 
-
 # configure logger
 gunicorn_error_logger = logging.getLogger('gunicorn.error')
 app.logger.removeHandler(default_handler)
@@ -76,10 +22,8 @@ app.logger.handlers.extend(gunicorn_error_logger.handlers)
 app.logger.setLevel(gunicorn_error_logger.level)
 
 # Allocate space for the room data
-room_data: Dict[str, RoomInfo] = dict()
+room_data = RoomData()
 
-
-# views
 
 @app.route("/", methods=["GET"])
 def home() -> dict:
@@ -94,7 +38,6 @@ def home() -> dict:
         abort(400)
 
     return {"data": "Home page", "status": 200}
-
 
 
 @app.route("/create-room", methods=["GET"])
@@ -118,7 +61,7 @@ def create_room():
 
     username = args["username"]
 
-    room_id = generate_room(room_data)
+    room_id = room_data.generate_room()
 
     app.logger.debug("Opened room '%s'", room_id)
 
@@ -155,7 +98,10 @@ def game(room_id: str) -> dict:
         abort(404)
 
     # room is full
-    if room_data[room_id]["playerCount"] == 2:
+    if room_data.get(room_id)["playerCount"] == 2:
         abort(403)
+
+    # add the player to the room
+    room_data.add_player(room_id)
 
     return {"data": f"Game room {room_id} | username: {username}", "status": 200}
