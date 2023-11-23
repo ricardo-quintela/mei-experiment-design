@@ -64,7 +64,6 @@ Uma variável independente acontece **sempre** antes da variável dependente.
 
 - Linguagem de programação
 - Nível de conhecimento da linguagem
-- Documentação disponível
 - Tempo disponível
 
 ### Níveis
@@ -72,15 +71,12 @@ Uma variável independente acontece **sempre** antes da variável dependente.
 1. Linguagem de programação
 	1. Java
 	2. Python
-	3. C
+	3. JavaScript
 2. Nível de conhecimento da linguagem
 	1. Baixo - Controlo de fluxo, loops, tipos primitivos e estruturas de dados básicas
 	2. Intermédio - Boa gestão de paradigmas de programação (funcional, poo, procedimental)
 	3. Avançado - Multiprocessamento, threads, GUI
-3. Documentação disponível
-	1. Com documentação
-	2. Sem documentação
-4. Tempo disponível
-	1. Ilimitado
-	2. 1h
-	3. 30min
+3. Tempo disponível
+	1. 1h
+	2. 30min
+	3. 10min
