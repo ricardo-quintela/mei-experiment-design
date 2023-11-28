@@ -1,3 +1,4 @@
+# pylint: skip-file
 from random import randint
 from typing import TypedDict, List, Union
 
