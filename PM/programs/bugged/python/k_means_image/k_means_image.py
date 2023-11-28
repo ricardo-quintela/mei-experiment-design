@@ -1,3 +1,4 @@
+# pylint: skip-file
 import numpy as np
 from utils import rgb_to_lab, ciede2000_distance
 
