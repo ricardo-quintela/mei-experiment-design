@@ -7,7 +7,7 @@ duas funções que se podem considerar abstratas.
 
 Por ordem de mais simples para mais complexo.
 
-1. [K Means numa imagem](k_means_image/k_means_image.py)
+### 1. [K Means numa imagem](k_means_image/k_means_image.py)
 
 Este programa aplica o algoritmo de clustering K Means a uma imagem guardada num array.
 
@@ -17,13 +17,13 @@ espaço de cor [CIELAB](https://en.wikipedia.org/wiki/CIELAB_color_space).
 - `ciede2000_distance()` calcula a distância entre duas cores no espaço CIELAB
 utilizando a distância [CIEDE2000](https://en.wikipedia.org/wiki/Color_difference#CIEDE2000).
 
-2. [Lexer](lexer/lexer.py)
+### 2. [Lexer](lexer/lexer.py)
 
 Este é um analisador lexical ao qual podem ser atribuidos tokens com as suas respetivas expressões regulares.
 
 O analisador permite separar uma string por tokens.
 
-3. [Servidor REST](rest_server/rest_server.py)
+### 3. [Servidor REST](rest_server/rest_server.py)
 
 Este programa é um servidor REST. Tem 3 endpoints implementados:
 

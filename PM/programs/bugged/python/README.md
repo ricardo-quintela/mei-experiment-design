@@ -7,7 +7,7 @@ duas funções que se podem considerar abstratas.
 
 Por ordem de mais simples para mais complexo.
 
-1. [K Means numa imagem](k_means_image/k_means_image.py)
+### 1. [K Means numa imagem](k_means_image/k_means_image.py)
 
 Este programa aplica o algoritmo de clustering K Means a uma imagem guardada num array.
 
@@ -17,13 +17,83 @@ espaço de cor [CIELAB](https://en.wikipedia.org/wiki/CIELAB_color_space).
 - `ciede2000_distance()` calcula a distância entre duas cores no espaço CIELAB
 utilizando a distância [CIEDE2000](https://en.wikipedia.org/wiki/Color_difference#CIEDE2000).
 
-2. [Lexer](lexer/lexer.py)
+#### Bugs introduzidos
+
+1. linha `20` em `k_means_image.py`:
+```python
+centroids.length
+```  
+Devia ser
+```python
+len(centroids)
+```
+
+---
+
+2. linha `39` em `k_means_image.py`:
+```python
+distance > min_distance
+```  
+Devia ser
+```python
+distance < min_distance
+```
+
+---
+
+3. linha `44` em `k_means_image.py`:
+```python
+clusters[c]
+```
+Devia ser
+```python
+clusters[centroid]
+```
+
+### 2. [Lexer](lexer/lexer.py)
 
 Este é um analisador lexical ao qual podem ser atribuidos tokens com as suas respetivas expressões regulares.
 
 O analisador permite separar uma string por tokens.
 
-3. [Servidor REST](rest_server/rest_server.py)
+#### Bugs introduzidos
+
+1. linha `14` em `token.py`:
+```python
+__new__
+```
+Devia ser
+```python
+__init__
+```
+
+---
+
+2. linha `21` em `token.py`:
+
+Deve exitir o método `__hash__` pois assim a linha `39` em `lexer.py`
+não consegue encontrar os tokens no `Set`
+```python
+def __hash__(self) -> int:
+    return hash(self.name)
+```
+---
+
+3. linha `53` em `lexer.py`:
+
+```python
+self.tokens.append({name: regex})
+```
+Devia ser
+```python
+self.tokens.append((name, regex))
+```
+porque deste modo os outros métodos que acedem aos índices da lista
+de tokens não conseguem indexar nem o nome do token nem a expressão regular e
+a expressão regular do analisador lexical não é construida.
+
+
+### 3. [Servidor REST](rest_server/rest_server.py)
 
 Este programa é um servidor REST. Tem 3 endpoints implementados:
 
