@@ -2,6 +2,8 @@
 import numpy as np
 from utils import rgb_to_lab, ciede2000_distance
 
+MAXIMUM_POSSIBLE_DISTANCE = 500
+
 def k_means(centroids: list, img: np.ndarray):
     """Separates the given colors into clusters using the k means algorithm\n
     
@@ -15,14 +17,14 @@ def k_means(centroids: list, img: np.ndarray):
         List[List[np.ndarray]]: a list of clusters with their colors
     """
 
-    num_centroids = len(centroids)
+    num_centroids = centroids.length
     clusters = [list() for _ in range(num_centroids)]
 
     # iterate through the image pixels
     for i in range(img.shape[0]):
         for j in range(img.shape[1]):
             # initialize to the max distance possible
-            min_distance = 500
+            min_distance = MAXIMUM_POSSIBLE_DISTANCE
 
             # the index of the group where the color is going to be added to
             centroid = 0
@@ -34,12 +36,12 @@ def k_means(centroids: list, img: np.ndarray):
                 distance = ciede2000_distance(centroids[c], rgb_to_lab(img[i,j,:]))
 
                 # update the new min distance and the centroid index
-                if distance < min_distance:
+                if distance > min_distance:
                     min_distance = distance
                     centroid = c
 
             # add the color to it's respective cluster
-            clusters[centroid].append(img[i,j,:])
+            clusters[c].append(img[i,j,:])
 
 
     return clusters

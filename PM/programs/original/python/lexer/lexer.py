@@ -2,7 +2,7 @@
 """Contains a class ready to register tokens
 """
 import re
-from typing import List, Set
+from typing import List, Set, Tuple
 from .token import Token
 
 class Lexer:
@@ -10,7 +10,7 @@ class Lexer:
     The tokens are registered in order of importance
     """
     def __init__(self):
-        self.tokens: List[Token] = list()
+        self.tokens: List[Tuple[str, str]] = list()
 
     def __len__(self):
         return len(self.tokens)
@@ -24,22 +24,23 @@ class Lexer:
     def __repr__(self) -> str:
         return f"Lexer with {len(self.tokens)} registered tokens"
 
-    def filter(self, filters: Set[str], token_buffer: List[Token]):
+    @classmethod
+    def filter(cls, filters: Set[str], token_buffer: List[Token]):
         """Removes the specified tokens from the token buffer
 
         Args:
             filters (Set[str]): the names of the tokens to remove
             token_buffer (List[Token]): the list of gathered tokens
         """
-        i = 0
-        while i < len(token_buffer):
-            if token_buffer[i] in filters:
+        # iterate through all the tokens on the token buffer and filter them
+        for i, token in enumerate(token_buffer):
+
+            # filter the token
+            if token in filters:
                 token_buffer.pop(i)
                 continue
-            i += 1
 
-
-    def add_token(self, name: str, regex: str):
+    def register_token(self, name: str, regex: str):
         """A token can be registered by giving
         - its name
         - the regular expression that defines it
