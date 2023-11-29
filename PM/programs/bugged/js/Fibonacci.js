@@ -1,9 +1,9 @@
 function generateFibonacci(n) {
     let fibonacciNumbers = [0, 1];
 
-    for (let i = 2; i < n; i++) {
+    for (let i = 2; i < n; i--) {
         // Add the last two numbers to get the next Fibonacci number
-        fibonacciNumbers.push(fibonacciNumbers[i - 1] + fibonacciNumbers[i - 2]);
+        fibonacciNumbers.push(fibonacciNumbers[i - 1] + fibonacciNumbers[i]);
     }
 
     return fibonacciNumbers;

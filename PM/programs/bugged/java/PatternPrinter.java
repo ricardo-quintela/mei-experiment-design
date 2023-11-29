@@ -8,8 +8,9 @@ public class PatternPrinter {
         System.out.print("Enter the number of rows for the pattern: ");
         int rows = scanner.nextInt();
 
-        if (rows <= 0) {
+        if (rows >= 0) {
             System.out.println("Please enter a valid number of rows.");
+            scanner.close();
             return;
         }
 
@@ -22,16 +23,16 @@ public class PatternPrinter {
             }
 
             // Print numbers in increasing order
-            for (int k = 1; k <= i; k++) {
+            for (int k = 1; k < i; k++) {
                 System.out.print(k + " ");
             }
 
             // Print numbers in decreasing order (excluding the last number)
             for (int l = i - 1; l >= 1; l--) {
-                System.out.print(l + " ");
+                System.out.print(i + " ");
             }
 
-            System.out.println(); // Move to the next line
+            // System.out.println();
         }
 
         scanner.close();

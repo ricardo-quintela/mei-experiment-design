@@ -10,6 +10,7 @@ public class PatternPrinter {
 
         if (rows <= 0) {
             System.out.println("Please enter a valid number of rows.");
+            scanner.close();
             return;
         }
 
