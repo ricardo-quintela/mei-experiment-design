@@ -38,6 +38,13 @@ Um pull request requer que o código juntado tenha a versão mais recente e que 
 5. As mudanças são integradas no ramo "*main*"
 
 
+# Hipótese
+
+Procuramos corroborar a seguinte hipótese:
+
+> O desempenho das inspeções de código varia significativamente entre linguagens de programação.
+
+
 # Variáveis dependentes
 
 Variáveis que dependem das independentes.
