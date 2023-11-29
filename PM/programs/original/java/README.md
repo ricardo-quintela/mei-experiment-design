@@ -32,14 +32,9 @@ Bugs a adicionar - alterar classes e acesso aos dadaos
 
 3. [Comunicação entre um servidor e cliente](\server_client)
 
-Simular uma interação simples entre um servidor e cliente em uma loja.
-O servidor trata do inventario e o cliente de fazer as requests. A comunicação é feita utilizando sockets
 
-Não esta full completo e não sei se vai ser este o exercicio mais dificil, ainda está mt mt simples
-Estava a pensar utilizar uma estrutura de dados (arvore ou assim) para guardar os dados
-
-Bugs a adicionar - tanta cena q pode ser mas ainda n sei se vai ser este o código
-
+Simular uma interação simples entre um servidor e cliente considerando uma lista de estudantes (hashmap).
+O servidor trata da lista de estudantes e o cliente de fazer as requests. A comunicação é feita utilizando sockets
 
 # Referências
 1. Aulas EA 3ºAno

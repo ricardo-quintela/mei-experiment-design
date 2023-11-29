@@ -62,6 +62,7 @@ class InventoryManager {
             System.out.println(product.getName() + " - Price: $" + product.getPrice() +
                     " - Quantity: " + product.getQuantity());
         }
+        return;
     }
 
     public void performInventoryCheck() {

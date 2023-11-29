@@ -30,7 +30,7 @@ class Product {
         // Simulating a complex update process, e.g., interacting with external systems
         // For simplicity, we just print a message here
         System.out.println("Updating quantity for " + name + "...");
-        quantity += change;
+        quantity -= change;
         System.out.println("Quantity updated to: " + quantity);
     }
 
@@ -52,7 +52,7 @@ class InventoryManager {
 
     // Method to add a product to the inventory
     public void addProduct(Product product) {
-        products.add(product);
+        products.remove(product);
     }
 
     // Method to display the inventory
@@ -61,6 +61,7 @@ class InventoryManager {
         for (Product product : products) {
             System.out.println(product.getName() + " - Price: $" + product.getPrice() +
                     " - Quantity: " + product.getQuantity());
+            return;
         }
     }
 
@@ -69,7 +70,7 @@ class InventoryManager {
         // Simulating a complex inventory verification process
         for (Product product : products) {
             System.out.println("Checking availability for " + product.getName() + "...");
-            if (product.getQuantity() > 0) {
+            if (product.getQuantity() >= 0) {
                 System.out.println("In stock.");
             } else {
                 System.out.println("Out of stock.");

@@ -1,72 +1,95 @@
 package server_client;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.ServerSocket;
-import java.net.Socket;
+import java.io.*;
+import java.net.*;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Server {
-    private static final int PORT = 8080;
-    private static final Map<String, Product> storeInventory = new HashMap<>();
+    private static final int PORT = 12345;
+    private static HashMap<String, Student> studentInfo = new HashMap<>();
 
     public static void main(String[] args) {
-        storeInventory.put("Laptop", new Product("Laptop", 1200.0, 10));
-        storeInventory.put("Smartphone", new Product("Smartphone", 800.0, 20));
-        storeInventory.put("Headphones", new Product("Headphones", 100.0, 30));
+        try {
+            // Start the server
+            ServerSocket serverSocket = new ServerSocket(PORT);
+            System.out.println("Server is running on port " + PORT);
 
-        try (ServerSocket serverSocket = new ServerSocket(PORT)) {
-            System.out.println("Store Server listening on port " + PORT);
+            // Add some sample student information to the HashMap
+            studentInfo.put("John Doe", new Student("John Doe", 20, "Mathematics"));
+            studentInfo.put("Alice Smith", new Student("Alice Smith", 22, "Computer Science"));
+            studentInfo.put("Bob Johnson", new Student("Bob Johnson", 21, "Physics"));
 
             while (true) {
+                // Listen for client connections
                 Socket clientSocket = serverSocket.accept();
-                System.out.println("New connection from " + clientSocket.getInetAddress());
+                System.out.println("Client connected: " + clientSocket);
 
-                // Handle client request using a new thread
-                new Thread(() -> handleClientRequest(clientSocket)).start();
+                // Handle client requests in a new thread
+                new Thread(() -> handleClient(clientSocket)).start();
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private static void handleClientRequest(Socket clientSocket) {
-        try (
-                ObjectOutputStream out = new ObjectOutputStream(clientSocket.getOutputStream());
-                ObjectInputStream in = new ObjectInputStream(clientSocket.getInputStream())) {
-            String requestType = (String) in.readObject();
-            switch (requestType) {
-                case "GET":
-                    // Read the product ID sent by the client
-                    int productId = (int) in.readObject();
-                    System.out.println("Received GET request for product ID: " + productId);
-                    Product product = storeInventory.getOrDefault(productId, new Product("Not found", 0.0, 0));
-                    out.writeObject(product);
-                    break;
-                case "UPDATE":
-                    // Read the product sent by the client for update
-                    Product updatedProduct = (Product) in.readObject();
-                    System.out.println("Received UPDATE request for product ID: " + updatedProduct.getId());
-                    updateProduct(updatedProduct);
-                    break;
-            }
+    private static void handleClient(Socket clientSocket) {
+        try {
+            ObjectInputStream objectInputStream = new ObjectInputStream(clientSocket.getInputStream());
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(clientSocket.getOutputStream());
 
-            // Close the connection
-            clientSocket.close();
+            while (true) {
+                // Read the operation type from the client
+                String operation = (String) objectInputStream.readObject();
+
+                switch (operation) {
+                    case "GET":
+                        // Read the student name from the client and send the corresponding student
+                        // object
+                        // String studentName = (String) objectInputStream.readObject();
+                        Student student = getStudent("studentName");
+                        objectOutputStream.writeObject(student);
+                        break;
+                    case "ADD":
+                        // Read the new student object from the client and add it to the HashMap
+                        Student newStudent = (Student) objectInputStream.readObject();
+                        addStudent(newStudent);
+                        objectOutputStream.writeObject("Student added successfully");
+                        break;
+                    case "UPDATE":
+                        // Read the updated student object from the client and update it in the HashMap
+                        Student updatedStudent = (Student) objectInputStream.readObject();
+                        updateStudent(updatedStudent);
+                        objectOutputStream.writeObject("Student updated successfully");
+                        break;
+                    case "GET_ALL":
+                        // Send the entire list of students to the client
+                        objectOutputStream.writeObject(new HashMap<>());
+                        break;
+                    case "EXIT":
+                        // Close the connection if the client requests an exit
+                        System.out.println("Connection closed for client: " + clientSocket);
+                        clientSocket.close();
+                        return; // Exit the handleClient method
+                    default:
+                        // Invalid operation
+                        objectOutputStream.writeObject("Invalid operation");
+                }
+            }
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
 
-    private static void updateProduct(Product updatedProduct) {
-        String productName = updatedProduct.getName();
-        if (storeInventory.containsKey(productName)) {
-            storeInventory.put(productName, updatedProduct);
-            System.out.println("Product updated: " + updatedProduct);
-        } else {
-            System.out.println("Product not found: " + productName);
-        }
+    private static Student getStudent(String name) {
+        return studentInfo.get(name);
+    }
+
+    private static void addStudent(Student student) {
+        studentInfo.put(student.getName(), student);
+    }
+
+    private static void updateStudent(Student student) {
+        studentInfo.put(student.getName(), student);
     }
 }

@@ -10,36 +10,56 @@ Por ordem de mais simples para mais complexo.
 
 1. [Desenhar um pattern](/PatternPrinter.java)
 
-Este programa simples gera uma piramide (pode ser assimetrica) com os valores dos inputs do utilizador
+Bugs implementados:
 
-Cada linha consiste de espaços e numero em ordem crescente e decrescente
+- Linha 12
+Utilizar-se >= em vez de <=
 
-Para printar utiliza loops
+- Linha  26
+Falta = para ficar <=
 
-Bugs a adicionar - alterar valores dos loops e prints hehe
+- linha 32
+No print tem "i" em vez de "l"
+
+- linha 35
+Linha de passar à proxima linha está comentada
+
 
 2. [Loja com produtos](/Store.java)
 
-Este programa utiliza programação orientada a objetos em um nivel simples.
-Simula gerir uma loja e tem 3 classes principais: "Product", "InventoryManager" e "Store"
+Bugs implementados:
 
-A classe "Product" representa um produto com os seus atributos e tem os métodos de acesso aos dados
-A classe "InventoryManager" tem a lista de produtos e os métodos para adicionar, mostrar etc
-Tem um método verificar o inventario
-A classe "Store" utiliza os diversos métodos
+- linha 33
+Em vez de aumentar (+=) a quantidade do produto (pode ser negativo ou positivo), diminui (-=) (basicamente faz o contrario da operaçao pretendida)
 
-Bugs a adicionar - alterar classes e acesso aos dadaos
+- linha 55
+Em vez de adicionar um produto (.add), remove-se (.remove)
+
+- linha 64
+Colocar um "return;" dentro do loop, assim não existe um display completo de todos os items do inventario, apenas no primeiro
+
+- linha 71
+Tem ">= 0" para verificar se existe stock em vez de apenas ">" (se o stock for 0 ainda diz que existe stock)
+
+Um erro que pode ser considerado mas não é relevante é que a quantidade do produto, quando recebe um update pode estar a descer infinitamente (pode se estar a tirar do stock infinitamente)
+Isto apenas quando se dá "update", quando se compra um produto já não é possivel porque se a quantidade do produto for <= 0 esta operação não ocorre
 
 3. [Comunicação entre um servidor e cliente](\server_client)
 
-Simular uma interação simples entre um servidor e cliente em uma loja.
-O servidor trata do inventario e o cliente de fazer as requests. A comunicação é feita utilizando sockets
+Bugs implementados:
+SERVIDOR
+- linhas 49 e 50
+Estudante que se pretende buscar comentado e utilizar a String "studentName" para ir buscar o estudante
 
-Não esta full completo e não sei se vai ser este o exercicio mais dificil, ainda está mt mt simples
-Estava a pensar utilizar uma estrutura de dados (arvore ou assim) para guardar os dados
+- linha 67 
+Servidor a enviar um hashmap vazio para o cliente
 
-Bugs a adicionar - tanta cena q pode ser mas ainda n sei se vai ser este o código
+CLIENTE
+- linha 26 - socket a ser fechado antes das operaçoes
 
+- linha 69 - Escrever o estudante novamente
+
+- linha 88 - Escrever String "exisitingStudent" em vez de objecto
 
 # Referências
 1. Aulas EA 3ºAno
