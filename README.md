@@ -84,6 +84,5 @@ Uma variável independente acontece **sempre** antes da variável dependente.
 	2. Intermédio - Boa gestão de paradigmas de programação (funcional, poo, procedimental)
 	3. Avançado - Multiprocessamento, threads, GUI
 3. Tempo disponível
-	1. 1h
-	2. 30min
-	3. 10min
+	1. 5min
+	2. 10min

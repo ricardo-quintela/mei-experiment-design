@@ -57,6 +57,7 @@ def create_room():
 
     args = request.args
 
+    # username not in query params
     if "username" not in args:
         abort(400)
 
@@ -88,7 +89,7 @@ def game(room_id: str) -> dict:
 
     args = request.args
 
-    # username not in params
+    # username not in query params
     if "username" not in args:
         abort(400)
 
@@ -104,5 +105,7 @@ def game(room_id: str) -> dict:
 
     # add the player to the room
     room_data.add_player(room_id)
+
+    app.logger.debug("Added player '%s' to room '%s'", username, room_id)
 
     return {"data": f"Game room {room_id} | username: {username}", "status": 200}

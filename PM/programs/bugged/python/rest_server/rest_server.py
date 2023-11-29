@@ -52,11 +52,12 @@ def create_room():
     """
 
     # bad request
-    if request.method != "GET":
+    if request.method != "POST":
         abort(400)
 
     args = request.args
 
+    # username not in query params
     if "username" not in args:
         abort(400)
 
@@ -66,7 +67,7 @@ def create_room():
 
     app.logger.debug("Opened room '%s'", room_id)
 
-    return redirect(f"/game/{room_id}?username={username}", code=303)
+    return redirect(f"game/{room_id}?username={username}", code=303)
 
 
 @app.route("/game/<room_id>", methods=["GET"])
@@ -88,11 +89,17 @@ def game(room_id: str) -> dict:
 
     args = request.args
 
-    # username not in params
+    # username not in query params
     if "username" not in args:
         abort(400)
 
     username = args["username"]
+
+    # roomId not in query params
+    if "roomId" not in args:
+        abort(400)
+
+    room_id = args["roomId"]
 
     # room does not exist
     if room_id not in room_data:
@@ -104,5 +111,7 @@ def game(room_id: str) -> dict:
 
     # add the player to the room
     room_data.add_player(room_id)
+
+    app.logger.debug("Added player '%s' to room '%s'", username, room_id)
 
     return {"data": f"Game room {room_id} | username: {username}", "status": 200}
