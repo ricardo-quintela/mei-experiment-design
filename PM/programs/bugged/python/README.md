@@ -102,6 +102,48 @@ Este programa é um servidor REST. Tem 3 endpoints implementados:
 - `/game/<room_id>?username=STRING` - permite que um cliente se junte a uma sala criada previamente.
 
 
+#### Bugs inteoduzidos
+
+1. linha `69` em `rest_server.py`:
+
+```python
+redirect(f"game/{room_id}?username={username}", code=303)
+```
+Devia ser
+```python
+redirect(f"/game/{room_id}?username={username}", code=303)
+```
+Ao não colocar a `/` o url seria acrescentado ao fim do atual.
+
+---
+
+2. linha `55` em `rest_server.py`:
+
+```python
+if request.method != "POST":
+```
+Devia ser
+```python
+if request.method != "GET":
+```
+porque o método está definido como *GET*.
+
+---
+
+3. linha `98` em `rest_server.py`:
+
+```python
+# roomId not in query params
+if "roomId" not in args:
+    abort(400)
+
+room_id = args["roomId"]
+```
+Devia ser removido porque `room_id` já está definido como um *path parameter*.
+
+Em alternativa, o path parameter podia ser removido nas linhas `73` e `74`.
+
+
 # Referências
 
 1. https://github.com/ricardo-quintela/led_controller/

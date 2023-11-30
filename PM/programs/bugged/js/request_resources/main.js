@@ -3,7 +3,10 @@
  * @param {String} resource the resource name to load
  * @param {String} roomId the id of the room
  * @param {String} playerId the id of the player
- * @returns the server side rendered component
+ * @returns the server side rendered component as a string
+ * @example
+ * requestResource("gameContent", roomId, username);
+ * "<h1>Game Content!</h1>\n<p>You are playing the game!</p>"
  */
 function requestResource(resource, roomId, username) {
     const http = new XMLHttpRequest();
@@ -17,6 +20,7 @@ function requestResource(resource, roomId, username) {
 
 document.addEventListener("DOMContentLoaded", () => {
 
+    let mainEl;
     const username = new URLSearchParams(window.location.search).get("username");
     const roomId = window.location.pathname.slice(6);
 
@@ -26,9 +30,16 @@ document.addEventListener("DOMContentLoaded", () => {
     loadGameButtonEl.addEventListener("click", (e) => {
         e.preventDefault();
 
-        const mainEl = document.querySelector("main");
+        // get the main element from the DOM
+        document.querySelector(".main");
 
-        mainEl.innerHTML = requestResource("gameContent", roomId, username);
+        // request the new content
+        const resourceContent = requestResource("gameContent", roomId, username);
+
+        // replaces the main element's inner html content with the new one
+        if (mainEl != resourceContent) {
+            mainEl.innerHtml = resourceContent.innerHtml;
+        }
     });
 
 });
