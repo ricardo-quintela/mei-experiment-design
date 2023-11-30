@@ -17,3 +17,6 @@ Programa que recebe um clique num botão e pede ao servidor mais conteúdo, nest
 
 
 # Referências
+
+1. 
+2. https://github.com/ricardo-quintela/negate/
