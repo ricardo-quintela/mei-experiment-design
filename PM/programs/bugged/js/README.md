@@ -9,7 +9,7 @@ Por ordem de mais simples para mais complexo.
 
 1. [Cena de fibonacci](Fibonacci.js)
 
-Programa simples com a regra de fibo
+Programa simples com a regra de fibonacci
 
 Bugs:
 

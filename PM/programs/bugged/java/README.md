@@ -1,8 +1,6 @@
 # Programas em Java
 
 Esta pasta contém 3 programas. 
-Store.java e PatternPrinter.java estão completos (programa fácil e médio)
-enquanto o terceiro (server e client) ainda não
 
 ## Descrição dos programas
 
