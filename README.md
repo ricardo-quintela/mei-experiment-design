@@ -15,7 +15,7 @@ Uma inspeção de código formal que segue várias etapas para garantir a efici�
 	2. Distribuição de papéis
 3. Preparação
 	1. Os participantes revêm os materiais antes da inspeção para se prepararem
-	2. Os participantes preparam os seus papéis (lápis, canetas, sla...)
+	2. Os participantes preparam os seus papéis (lápis, canetas, ...)
 4. Reunião de inspeção
 	1. Deteção dos defeitos
 5. Rearranjo
@@ -42,7 +42,7 @@ Um pull request requer que o código juntado tenha a versão mais recente e que 
 
 Procuramos corroborar a seguinte hipótese:
 
-> O desempenho das inspeções de código varia significativamente entre linguagens de programação.
+> O desempenho das inspeções de código varia significativamente dependendo da rotina de descanso do revisor
 
 
 # Variáveis dependentes
@@ -69,16 +69,22 @@ Uma variável independente acontece **sempre** antes da variável dependente.
 
 ## Recolha de variáveis independentes
 
+OG VARIAVIES
 - Linguagem de programação
 - Nível de conhecimento da linguagem
 - Tempo disponível
 
+NOVAS
+- Nível de conhecimente da linguagem
+- Tempo disponível
+- Tempo de descanso do revisor
+- Qualidade do sono
+
+
 ### Níveis
 
 1. Linguagem de programação
-	1. Java
-	2. Python
-	3. JavaScript
+- Python
 2. Nível de conhecimento da linguagem
 	1. Baixo - Controlo de fluxo, loops, tipos primitivos e estruturas de dados básicas
 	2. Intermédio - Boa gestão de paradigmas de programação (funcional, poo, procedimental)
@@ -86,3 +92,4 @@ Uma variável independente acontece **sempre** antes da variável dependente.
 3. Tempo disponível
 	1. 5min
 	2. 10min
+	3. 10 a 15 min
