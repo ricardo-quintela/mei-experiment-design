@@ -17,7 +17,7 @@ def k_means(centroids: list, img: np.ndarray):
         List[List[np.ndarray]]: a list of clusters with their colors
     """
 
-    num_centroids = centroids.length
+    num_centroids = img.shape[0]
     clusters = [list() for _ in range(num_centroids)]
 
     # iterate through the image pixels

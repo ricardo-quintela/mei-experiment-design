@@ -36,7 +36,7 @@ class Lexer:
         for i, token in enumerate(token_buffer):
 
             # filter the token
-            if token in filters:
+            if token not in filters:
                 token_buffer.pop(i)
                 continue
 
@@ -50,7 +50,7 @@ class Lexer:
             name (str): the name of the token
             regex (str): the regular expression that defines the token
         """
-        self.tokens.append({name: regex})
+        self.tokens.append((name, regex))
 
     def get_regex(self) -> str:
         """Returns the entire regex of the lexer\n
@@ -83,4 +83,4 @@ class Lexer:
                 Token(name=match.lastgroup, value=match.group())
             )
 
-        return tokenized_string
+        return matches
