@@ -15,6 +15,9 @@ class Token:
         self.name: str = name
         self.value: Any = value
 
+    def __hash__(self) -> int:
+        return hash(self.name)
+
     def __str__(self) -> str:
         return self.name
 

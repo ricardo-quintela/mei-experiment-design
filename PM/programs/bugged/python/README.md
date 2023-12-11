@@ -21,7 +21,7 @@ utilizando a distância [CIEDE2000](https://en.wikipedia.org/wiki/Color_differen
 
 1. linha `20` em `k_means_image.py`:
 ```python
-centroids.length
+img.shape[0]
 ```  
 Devia ser
 ```python
@@ -69,28 +69,27 @@ __init__
 
 ---
 
-2. linha `21` em `token.py`:
-
-Deve exitir o método `__hash__` pois assim a linha `39` em `lexer.py`
-não consegue encontrar os tokens no `Set`
-```python
-def __hash__(self) -> int:
-    return hash(self.name)
-```
----
-
-3. linha `53` em `lexer.py`:
+2. linha `29` em `token.py`:
 
 ```python
-self.tokens.append({name: regex})
+if token not in filters:
 ```
 Devia ser
 ```python
-self.tokens.append((name, regex))
+if token in filters:
 ```
-porque deste modo os outros métodos que acedem aos índices da lista
-de tokens não conseguem indexar nem o nome do token nem a expressão regular e
-a expressão regular do analisador lexical não é construida.
+
+---
+
+3. linha `86` em `lexer.py`:
+
+```python
+return matches
+```
+Devia ser
+```python
+return tokenized_string
+```
 
 
 ### 3. [Servidor REST](rest_server/rest_server.py)
