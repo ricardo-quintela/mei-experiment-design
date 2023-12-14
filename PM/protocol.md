@@ -3,7 +3,7 @@
 ## Preparação
 
 1. Utilizar o [formulário](https://forms.gle/JdWYdTLPbTjiMfMK7) para recolha de dados e consentimento
-2. Utilizar os [programas](PM/programs/bugged) com bugs para testar
+2. Utilizar os [programas](programs/bugged) com bugs para testar
 3. Utilizar uma folha de papel e um lápis para tirar notas
 
 ## Protocolo
